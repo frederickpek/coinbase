@@ -1,0 +1,2 @@
+# coinbase
+Coinbase API Client
