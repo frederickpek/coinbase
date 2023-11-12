@@ -13,9 +13,10 @@ from typing import List
 
 
 class CoinbaseApi(Client):
-    
     def get_account(self, account_uuid: str, should_log=True) -> dict:
-        data = self.request(GET, GET_ACCOUNT.format(account_uuid), should_log=should_log)
+        data = self.request(
+            GET, GET_ACCOUNT.format(account_uuid), should_log=should_log
+        )
         account: dict = data["account"]
         return account
 
@@ -28,7 +29,7 @@ class CoinbaseApi(Client):
         data = self.request(GET, GET_PRODUCT.format(product_id), should_log=should_log)
         return data
 
-    def get_products(self, product_type: str=None, should_log=True) -> List[dict]:
+    def get_products(self, product_type: str = None, should_log=True) -> List[dict]:
         # product_type: SPOT & FUTURE, default is SPOT
         params = {}
         if product_type:
@@ -42,7 +43,7 @@ class CoinbaseApi(Client):
         data = self.request(GET, LIST_ORDERS, params=params, should_log=should_log)
         open_orders: List[dict] = data["orders"]
         return open_orders
-    
+
     def cancel_orders(self, order_ids: List[str], should_log=True) -> List[dict]:
         if not order_ids:
             return list()
@@ -52,8 +53,7 @@ class CoinbaseApi(Client):
         return results
 
     def cancel_all_orders(self, should_log=True) -> List[dict]:
-        open_orders = self.open_orders(should_log=should_log)
+        open_orders = self.get_open_orders(should_log=should_log)
         order_ids = list(map(lambda x: x["order_id"], open_orders))
         results = self.cancel_orders(order_ids=order_ids, should_log=should_log)
         return results
-

@@ -1,4 +1,3 @@
-
 def get_query_params_str(params: dict):
     if not params:
         return ""

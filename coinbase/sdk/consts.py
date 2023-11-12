@@ -13,4 +13,3 @@ LIST_ORDERS = "/api/v3/brokerage/orders/historical/batch"
 CANCEL_ORDERS = "/api/v3/brokerage/orders/batch_cancel"
 LIST_PRODUCTS = "/api/v3/brokerage/products"
 GET_PRODUCT = "/api/v3/brokerage/products/{}"
-
