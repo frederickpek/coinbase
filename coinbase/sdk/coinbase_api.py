@@ -14,9 +14,8 @@ from typing import List
 
 class CoinbaseApi(Client):
     def get_account(self, account_uuid: str, should_log=True) -> dict:
-        data = self.request(
-            GET, GET_ACCOUNT.format(account_uuid), should_log=should_log
-        )
+        endpoint = GET_ACCOUNT.format(account_uuid)
+        data = self.request(GET, endpoint, should_log=should_log)
         account: dict = data["account"]
         return account
 
@@ -26,7 +25,8 @@ class CoinbaseApi(Client):
         return list(filter(lambda x: float(x["available_balance"]["value"]), accounts))
 
     def get_product(self, product_id: str, should_log=True) -> dict:
-        data = self.request(GET, GET_PRODUCT.format(product_id), should_log=should_log)
+        endpoint = GET_PRODUCT.format(product_id)
+        data = self.request(GET, endpoint, should_log=should_log)
         return data
 
     def get_products(self, product_type: str = None, should_log=True) -> List[dict]:
